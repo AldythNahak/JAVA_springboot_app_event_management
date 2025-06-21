@@ -1,0 +1,115 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<title>Registration Ticket</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .content {
+    font-size: 14px;
+    height: auto;
+  }
+
+  table {
+    width: 100%;
+
+    border-collapse: collapse;
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="content">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+      <tr>
+        <th style="color: #ffffff; background-color: #84CEEB;">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td align="center" valign="top" style="padding: 10px 10px 10px 10px;"> </td>
+            </tr>
+          </table>
+        </th>
+      </tr>
+      <tr>
+        <th style="color: #ffffff; background-color: #84CEEB;">
+          <h1>Registration Ticket</h1>
+        </th>
+      </tr>
+      <th style="color: #ffffff; background-color: #84CEEB;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td align="center" valign="top" style="padding: 10px 10px 10px 10px;"> </td>
+          </tr>
+        </table>
+      </th>
+      </tr>
+      <tr style="height: 50px;">
+        <td style="color: #0a0a0a; background-color: #C1C8E4; padding: 10px 10px 0px 10px; ">
+          <p style="font-size: 16px;">Hello <b th:text="${name}">Full Name</b>, you have successfully registered an
+            event
+            <b th:text="${event}">"Event Name"</b>. Go to the
+            following link "join" to
+            enter room
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="background-color: #C1C8E4; padding: 10px 10px 10px 10px; ">
+          <table cellpadding="0" cellspacing="0" width="100%" style="font-size: 30; max-width: 600px;">
+            <tr style="background-color: #ffffff; color: #0c0c0c; height: 30px; ">
+              <th>Day</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th>Action</th>
+            </tr>
+            <tr style="color: #0c0c0c; height: 30px; height: 50px;" th:each="schedule, iter : ${schedules}">
+              <td align="center" th:text="${iter.index + 1}">-</td>
+              <td align="center" th:text="${#temporals.format(schedule.startTime, 'EEEE, dd-MM-yyyy')}">Thursday, 28
+                october 2021
+              </td>
+              <td align="center"
+                th:text="${#temporals.format(schedule.startTime, 'HH:mm')} +' - '+ ${#temporals.format(schedule.endTime, 'HH:mm')}">
+                08:00 - 12:00</td>
+              <td align="center"
+                th:text="${schedule.eventType.isOnline} ? '(Online) ' + ${schedule.location} : '(Offline) ' + ${schedule.location}">
+                <b>(Online)</b> Zoom
+              </td>
+              <td align="center" th:if="${schedule.eventType.isOnline}">
+                <table class="row-link">
+                  <tr>
+                    <th>
+                      <a th:href="${link}"
+                        style="font-size: 14px; background-color: #5680E9; border-radius: 3px;  font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 5px 5px;  display: inline-block;">Join</a>
+                    </th>
+                  </tr>
+                </table>
+              </td>
+              <td align="center" th:if="${not schedule.eventType.isOnline}">
+                -
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th style="color: #666666; background-color: #C1C8E4;">
+          <p>&copy; 2021 MCC5657</p>
+          <p>Event Management</p>
+        </th>
+      </tr>
+
+    </table>
+  </div>
+
+</body>
+
+</html>
