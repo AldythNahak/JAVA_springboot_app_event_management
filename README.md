@@ -1,6 +1,6 @@
-# 🎫 CLIENT SIDE - Event Management System – Java Spring Boot
+# 🎫 Event Management System – Java Spring Boot
 
-A Frontend Side system built with **Java Spring Boot**. The application allows users to register and manage events, while administrators can create events, view participants, and handle event logistics efficiently.
+A web-based event management system built with **Java Spring Boot**. The application allows users to register and manage events, while administrators can create events, view participants, and handle event logistics efficiently.
 
 ---
 
