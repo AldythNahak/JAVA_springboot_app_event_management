@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout.html}">
+<!--begin::Head-->
+
+<head>
+    <title>Event Management</title>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body>
+    <th:block layout:fragment="content">
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h3 class="card-label">Event
+                        <span class="d-block text-muted pt-2 font-size-sm">list of all event</span>
+                    </h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a th:href="@{/event/create}" class="btn btn-primary font-weight-bolder">
+                        <span class="svg-icon svg-icon-md">
+                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" cx="9" cy="15" r="6" />
+                                    <path
+                                        d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z"
+                                        fill="#000000" opacity="0.3" />
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span>New Event</a>
+                    <!--end::Button-->
+                </div>
+            </div>
+            <div class="card-body">
+                <!--begin: Search Form-->
+                <!--begin::Search Form-->
+                <div class="mb-7">
+                    <div class="row align-items-center">
+                        <div class="col-lg-9 col-xl-8">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 my-2 my-md-0">
+                                    <div class="input-icon">
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                            id="kt_datatable_search_query" />
+                                        <span>
+                                            <i class="flaticon2-search-1 text-muted"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                        <select class="form-control" id="kt_datatable_search_status">
+                                            <option value="">All</option>
+                                            <option value="1">Up Coming</option>
+                                            <option value="2">On Going</option>
+                                            <option value="3">Ended</option>
+                                            <!-- <option value="4">Canceled</option> -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                        <select class="form-control" id="kt_datatable_search_type">
+                                            <option value="">All</option>
+                                            <option value="online">Online</option>
+                                            <option value="offline">Offline</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Search Form-->
+                <!--end: Search Form-->
+                <!--begin: Datatable-->
+                <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+        <!--begin::Modal-->
+        <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content" style="min-height: 590px;">
+                    <div class="modal-header py-5">
+                        <h5 class="modal-title">Schedule
+                            <span class="d-block text-muted font-size-sm"></span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--begin: Search Form-->
+                        <!--begin::Search Form-->
+                        <div class="mb-5">
+                            <div class="row align-items-center">
+                                <div class="col-lg-9 col-xl-8">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="input-icon">
+                                                <input type="text" class="form-control" placeholder="Search..."
+                                                    id="kt_datatable_search_query_2" />
+                                                <span>
+                                                    <i class="flaticon2-search-1 text-muted"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 my-2 my-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                                <select class="form-control" id="kt_datatable_search_type_2">
+                                                    <option value="">All</option>
+                                                    <option value="Online">Online</option>
+                                                    <option value="Offline">Offline</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Search Form-->
+                        <!--end: Search Form-->
+                        <!--begin: Datatable-->
+                        <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_sub"></div>
+                        <!--end: Datatable-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Modal-->
+    </th:block>
+    <th:block layout:fragment="js">
+        <script th:src="@{/js/table/datatable.js}"></script>
+        <script th:src="@{/js/table/eventColumn.js}"></script>
+    </th:block>
+</body>
+
+</html>

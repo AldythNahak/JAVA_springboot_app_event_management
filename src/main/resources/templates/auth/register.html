@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout_auth.html}">
+<!--begin::Head-->
+
+<head>
+    <title>Register</title>
+</head>
+
+<body>
+    <th:block layout:fragment="content">
+        <!--begin::Register form-->
+        <div class="">
+            <div class="mb-20">
+                <h3 class="text-dark-75">Register</h3>
+                <p class="opacity-60 text-dark-75">Enter your details to create a new account</p>
+            </div>
+            <form class="form text-center" id="kt_login_signup_form" th:object="${employee}">
+                <div class="form-group">
+                    <input
+                        class="form-control h-auto text-dark placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8"
+                        type="text" placeholder="Fullname" th:field="*{name}" />
+                </div>
+                <div class="form-group">
+                    <input
+                        class="form-control h-auto text-dark placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8"
+                        type="text" placeholder="Email" th:field="*{email}" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input
+                        class="form-control h-auto text-dark placeholder-white opacity-70 bg-dark-o-70 rounded-pill border-0 py-4 px-8"
+                        type="tel" id="example-tel-input" th:field="*{phoneNumber}" placeholder="Phone Number" />
+                </div>
+
+                <div class="form-group">
+                    <button id="kt_login_signup_submit"
+                        class="btn btn-pill btn-outline-dark font-weight-bold opacity-90 px-15 py-3 m-2">Register</button>
+                    <button id="kt_login_signup_cancel"
+                        class="btn btn-pill btn-outline-dark font-weight-bold opacity-70 px-15 py-3 m-2">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!--end::Login Sign up form-->
+    </th:block>
+    <th:block layout:fragment="js">
+        <script th:src="@{/js/signup-form.js}"></script>
+    </th:block>
+</body>
+<!--end::Body-->
+
+</html>

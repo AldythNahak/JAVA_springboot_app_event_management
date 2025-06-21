@@ -1,0 +1,24 @@
+<head th:fragment="head">
+    <base href="">
+    <meta charset="utf-8" />
+    <title>Event</title>
+    <meta th:id="_csrf" th:name="_csrf" th:content="${_csrf.token}" />
+    <meta th:id="_csrf_header" th:name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <link th:href="@{/css/page/wizard.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" />
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link th:href="@{/css/plugins.bundle.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/prismjs.bundle.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style.bundle.css}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}">
+    <link rel="stylesheet" th:href="@{/css/pagination.css}">
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+    <link rel="shortcut icon" th:href="@{/image/favicon.ico}" />
+
+</head>

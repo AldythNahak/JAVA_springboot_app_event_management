@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout.html}">
+
+<head>
+    <title>Check Out</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <th:block layout:fragment="content">
+        <div class="content flex-column-fluid" id="kt_content" style="background-color: rgba(212, 224, 233, 0.41)">
+            <div class="card card-custom overflow-hidden" style="background-color: rgba(212, 224, 233, 0.41)">
+                <div class="card-body p-0">
+                    <!--begin detail-->
+                    <div class="row justify-content-center bgi-size-cover bgi-no-repeat py-8 px-8 py-md-27 px-md-0">
+                        <div class="col-md-9">
+                            <h1 class="display-4 text-dark-75 font-weight-boldest text-center mb-10 rounded-pill py-5">
+                                Register Event</h1>
+
+                            <div class="card text-dark-50 rounded py-5"
+                                style="background-color: rgba(212, 224, 233, 0.41)">
+                                <h4 class="text-center">
+                                    By clicking "Register" I accept the Terms of Service and have read the Privacy
+                                    Policy.
+                                </h4>
+                                <h4 class="text-center mb-2">
+                                    I agree that EventManagement may share my information with the event organizer.
+                                </h4>
+                            </div>
+
+                            <form>
+                                <div class="card-body">
+                                    <div class="d-flex flex-row justify-content-xl-between mb-10 ">
+                                        <div class="form-group">
+                                            <label class="text-dark-75">Name</label>
+                                            <h4 class="text-dark-75" id="review_name"></h4>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="text-dark-7575">Phone Number</label>
+                                            <h4 class="text-dark-75" id="review_phoneNumber"></h4>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark-75">Email</label>
+                                        <h4 class="text-dark-75" id="review_email"></h4>
+                                    </div>
+                                </div>
+
+                                <div class="border-bottom w-100 opacity-20 mb-5"></div>
+
+                                <div class="checkbox-list">
+                                    <label class="checkbox text-dark-75 checkbox-outline checkbox-success">
+                                        <input type="checkbox" name="Checkboxes1" id="confirmCheck" />
+                                        <span></span>My contact information above is true
+                                    </label>
+                                </div>
+                            </form>
+
+                            <form id='checkout'>
+                                <div class="d-md-flex justify-content-md-end">
+                                    <input type="hidden" name="idEmployee" th:value="${idEmployee}" />
+                                    <input type="hidden" name="idEvent" th:value="${idEvent}" />
+                                    <button type="button" onclick='createTicket();'
+                                        class="btn btn-primary btn-pill font-weight-bolder text-uppercase px-9 py-4"
+                                        id="btnRegister" disabled>Register</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </th:block>
+    <th:block layout:fragment="js">
+        <script th:src="@{/js/custom/checkout.js}"></script>
+        <script>
+            $(function () {
+                $("#confirmCheck").change(function () {
+                    if ($(this).is(':checked')) {
+                        $("#btnRegister").removeAttr("disabled");
+                    } else {
+                        $("#btnRegister").prop("disabled", true);
+                    }
+                });
+            });
+        </script>
+    </th:block>
+</body>
+
+</html>

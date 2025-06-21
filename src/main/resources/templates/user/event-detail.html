@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout.html}">
+
+<head>
+    <title>Event Detail</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <th:block layout:fragment="content">
+        <div class="content flex-column-fluid" id="kt_content">
+            <div class="card card-custom overflow-hidden">
+                <div class="card-body p-0">
+                    <!--begin detail-->
+                    <div class="row justify-content-center bgi-size-cover bgi-no-repeat py-8 px-8 py-md-27 px-md-0">
+                        <div class="col">
+                            <h1 th:text="${data.title}" class="display-4 text-dark font-weight-boldest mb-10"
+                                id="eventTitle">EVENT
+                                TITLE</h1>
+
+                            <div class="row">
+                                <div class="d-flex flex-row-reverse text-white font-weight-boldest mb-10 col-12">
+                                    <a th:href="@{/event/{id}/checkout (id=${data.id})}"
+                                        class="btn btn-success font-weight-bold mr-2"
+                                        th:classappend="${data.participantQuantity == data.quota} ? disabled">
+                                        <i class="fas fa-ticket-alt"></i> Join
+                                    </a>
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')"
+                                        th:href="@{/event/{id}/edit (id=${data.id})}"
+                                        class="btn btn-warning font-weight-bold mr-2">
+                                        <i class="fas fa-pen"></i> Edit
+                                    </a>
+                                    <a sec:authorize="hasRole('ROLE_ADMIN')"
+                                        th:href="@{/event/{id}/participant (id=${data.id})}"
+                                        class="btn btn-info font-weight-bold mr-2 ">
+                                        <span class="badge bg-light text-info font-weight-bold alignt-middle mr-2"
+                                            th:text="${data.participantQuantity}"></span>
+                                        <span>Participant</span>
+                                    </a>
+                                    <p th:if="${data.participantQuantity == data.quota && data.status == 1}"
+                                        class="text-danger align-middle font-italic mr-10 ">
+                                        Participant quota is not available
+                                    </p>
+                                    <p th:if="${data.status != 1}" class="text-danger align-middle font-italic mr-10 ">
+                                        Registration deadline has ended
+                                    </p>
+                                    <span th:unless="${data.participantQuantity == data.quota ||
+                                        data.status != 1}" class="btn btn-primary mr-2">
+                                        <span class="badge badge-info mr-3"
+                                            th:text="${data.quota - data.participantQuantity}"></span>
+                                        Available
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                                        <div class="col-4 mx-5">
+                                            <img class="float-start" th:src="@{'data:image/jpeg;base64,'+${data.image}}"
+                                                alt="" style="height: 300px; width: 300px;" />
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <h5>Date & Time</h5>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="font-weight-bolder pt-1">
+                                                            <div class="col-12 borderless">
+                                                                <ul class="list-group"
+                                                                    th:each="schedule : ${data.schedulers}">
+                                                                    <li class="list-group-item border-0">
+                                                                        <i
+                                                                            class="fas fa-calendar-day icon-2x text-warning"></i>
+                                                                        <span class="ml-2"
+                                                                            th:text="${#temporals.format(schedule.startTime, 'EEEE, dd MMMM yyyy')}">
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="list-group-item text-primary border-0">
+                                                                        <i
+                                                                            class="far fa-clock icon-2x text-warning"></i>
+                                                                        <span class="ml-2"
+                                                                            th:text="${#temporals.format(schedule.startTime, 'HH:mm')} +' to '+${#temporals.format(schedule.endTime, 'HH:mm')}">
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <h5>Status</h5>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="font-weight-bolder pt-1">
+                                                            <div class="col-12 borderless">
+                                                                <ul class="list-group">
+                                                                    <li class="list-group-item border-0">
+                                                                        <span th:if="${data.status==1}">
+                                                                            <i
+                                                                                class="fas fa-info-circle icon-2x mr-5 text-success"></i>
+                                                                            <span class="ml-2 text-success">Up
+                                                                                comming</span>
+                                                                        </span>
+                                                                        <span th:if="${data.status==2}">
+                                                                            <i
+                                                                                class="fas fa-info-circle icon-2x mr-5 text-warning"></i>
+                                                                            <span class="ml-2 text-warning">On
+                                                                                Going</span>
+                                                                        </span>
+                                                                        <span th:if="${data.status==3}">
+                                                                            <i
+                                                                                class="fas fa-info-circle icon-2x mr-5 text-danger"></i>
+                                                                            <span class="ml-2 text-danger">Ended</span>
+                                                                        </span>
+                                                                        <span th:if="${data.status==4}">
+                                                                            <i
+                                                                                class="fas fa-info-circle icon-2x mr-5 text-danger"></i>
+                                                                            <span
+                                                                                class="ml-2 text-danger">Canceled</span>
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <h5>Registration Deadline</h5>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="font-weight-bolder pt-1">
+                                                            <div class="col-12 borderless">
+                                                                <ul class="list-group">
+                                                                    <li class="list-group-item text-primary border-0">
+                                                                        <i
+                                                                            class="fas fa-hourglass-start icon-2x text-danger"></i>
+                                                                        <span class="ml-2"
+                                                                            th:text="${#temporals.format(data.registrationDeadline, 'EEEE, dd MMMM yyyy')}">
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="list-group-item text-primary border-0">
+                                                                        <i class="far fa-clock icon-2x text-danger"></i>
+                                                                        <span class="ml-2"
+                                                                            th:text="${#temporals.format(data.registrationDeadline, 'HH:mm')}">
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <h5>Location</h5>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="font-weight-bolder pt-1">
+                                                            <div class="col-12 borderless">
+                                                                <ul class="list-group"
+                                                                    th:each="schedule : ${data.schedulers}">
+                                                                    <li class="list-group-item border-0">
+                                                                        <span th:if="${schedule.isOnline}">
+                                                                            <i
+                                                                                class="flaticon-laptop icon-2x mr-5 text-success"></i>
+                                                                        </span>
+                                                                        <span th:if="${!schedule.isOnline}">
+                                                                            <i
+                                                                                class="fas fa-map-marked-alt icon-2x mr-5 text-success"></i>
+                                                                        </span>
+                                                                        <span class="ml-2"
+                                                                            th:text="${schedule.location}">
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-bottom w-100 mb-3"></div>
+
+                            <div>
+                                <p th:text="${data.description}"
+                                    class="text-dark font-weight-boldest mb-10 text-justify" style="text-indent: 30px;">
+                                    Description
+                                </p>
+                            </div>
+
+                            <div class="bg-success rounded-pill py-5 mb-5">
+                                <h1 class="text-center text-white">OTHER EVENTS
+                                </h1>
+                            </div>
+
+                            <div class="row" id="event_list">
+
+                            </div>
+                            <div id="event_pagination"
+                                class="row d-flex justify-content-center align-items-center flex-wrap">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block layout:fragment="js">
+        <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
+        <script th:src="@{/js/custom/style.js}"></script>
+        <script th:src="@{/js/custom/event-detail.js}"></script>
+    </th:block>
+</body>
+
+</html>

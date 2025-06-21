@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout.html}">
+
+<head>
+    <title>Edit Detail Event</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <th:block layout:fragment="content">
+        <div class="container py-8">
+            <div class="row">
+                <div class="col-lg-4">
+                    <!--begin::Callout-->
+                    <div class="card card-custom wave wave-animate-slow wave-primary mb-8 mb-lg-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center p-5">
+                                <!--begin::Icon-->
+                                <div class="mr-6">
+                                    <i class="flaticon-calendar-with-a-clock-time-tools text-warning icon-3x"></i>
+                                </div>
+                                <!--end::Icon-->
+                                <!--begin::Content-->
+                                <div class="d-flex flex-column">
+                                    <a href="/event/eventlist?type=1"
+                                        class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Upcomming
+                                        Events</a>
+                                    <div th:text="${upcomming}" class="text-dark-75">0</div>
+                                </div>
+                                <!--end::Content-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Callout-->
+                </div>
+                <div class="col-lg-4">
+                    <!--begin::Callout-->
+                    <div class="card card-custom wave wave-animate-slow wave-warning mb-8 mb-lg-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center p-5">
+                                <!--begin::Icon-->
+                                <div class="mr-6">
+                                    <i class="flaticon-presentation text-success icon-3x"></i>
+                                </div>
+                                <!--end::Icon-->
+                                <!--begin::Content-->
+                                <div class="d-flex flex-column">
+                                    <a href="/event/eventlist?type=2"
+                                        class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">On Going
+                                        Events</a>
+                                    <div th:text="${ongoing}" class="text-dark-75">0</div>
+                                </div>
+                                <!--end::Content-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Callout-->
+                </div>
+                <div class="col-lg-4">
+                    <!--begin::Callout-->
+                    <div class="card card-custom wave wave-animate-slow wave-info mb-8 mb-lg-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center p-5">
+                                <!--begin::Icon-->
+                                <div class="mr-6">
+                                    <i class="flaticon-clipboard text-info icon-3x"></i>
+                                </div>
+                                <!--end::Icon-->
+                                <!--begin::Content-->
+                                <div class="d-flex flex-column">
+                                    <a href="/event/eventlist?type=3"
+                                        class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Ended
+                                        Events</a>
+                                    <div th:text="${ended}" class="text-dark-75">0</div>
+                                </div>
+                                <!--end::Content-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Callout-->
+                </div>
+                <!-- <div class="col-lg-3">
+                    <div class="card card-custom wave wave-animate-slow wave-danger mb-8 mb-lg-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center p-5">
+                                <div class="mr-6">
+                                    <i class="flaticon-cancel text-danger icon-3x"></i>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <a href="/event/eventlist?type=4"
+                                        class="text-dark text-hover-primary font-weight-bold font-size-h4 mb-3">Canceled
+                                        Events</a>
+                                    <div th:text="${canceled}" class="text-dark-75">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--begin::Card-->
+                    <div class="card card-custom gutter-b">
+                        <!--begin::Header-->
+                        <div class="card-header h-auto">
+                            <!--begin::Title-->
+                            <div class="card-title py-5">
+                                <h3 class="card-label">Event this year</h3>
+                            </div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Header-->
+                        <div class="card-body">
+                            <!--begin::Chart-->
+                            <div id="chart_1"></div>
+                            <!--end::Chart-->
+                        </div>
+                    </div>
+                    <!--end::Card-->
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block layout:fragment="js">
+        <script th:src="@{/js/custom/apexcharts.js}"></script>
+    </th:block>
+</body>
+
+</html>
