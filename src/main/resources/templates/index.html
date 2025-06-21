@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout.html}">
+<!--begin::Head-->
+
+<head>
+    <title>Event Management</title>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body>
+    <th:block layout:fragment="content">
+        <!--begin::Dashboard-->
+        <!--begin::carousel-->
+        <div class="col-xl-12">
+            <!--begin::Engage Widget 4-->
+            <div class="card card-custom card-stretch gutter-b">
+                <div class="card-body d-flex p-0">
+                    <div class="flex-grow-1 bg-light-success p-12 pb-40 card-rounded flex-grow-1 bgi-no-repeat"
+                        id="homeBanner">
+                        <p class="text-success pt-10 pb-5 font-weight-bolder line-height-lg" id="textBanner">FIND
+                            <br>YOUR
+                            <br>EVENT
+                        </p>
+                        <a th:href="@{ticket/ticketlist}"
+                            class="btn btn-info font-weight-bold py-2 px-6 link-ticket">Check my ticket</a>
+                    </div>
+                </div>
+            </div>
+            <!--end::Engage Widget 4-->
+        </div>
+        <!--end::carousel-->
+
+        <!--begin::Header Menu Wrapper-->
+        <div class="d-flex justify-content-center mb-3" id="kt_header_navs">
+            <!--begin::Tab Content-->
+            <div class="tab-content">
+                <!--begin::Tab Pane-->
+                <div class="tab-pane show active" id="kt_header_tab_1">
+                    <!--begin::Menu-->
+                    <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
+                        <!--begin::Nav-->
+                        <ul id="menu-list" class="menu-nav">
+                            <li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel"
+                                aria-haspopup="true">
+                                <a href="#" id="mainpage_all" class="menu-link" value="">
+                                    <span class="menu-text">All</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="#" id="mainpage_online" class="menu-link" value="online">
+                                    <span class="menu-text">Online</span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="#" id="mainpage_offline" class="menu-link" value="offline">
+                                    <span class="menu-text">Offline</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--end::Nav-->
+                    </div>
+                    <!--end::Menu-->
+                </div>
+                <!--end:Tab Pane-->
+            </div>
+            <!--end::Tab Content-->
+        </div>
+        <div id="search_result_main_page">
+        </div>
+        <!--end::Header Menu Wrapper-->
+        <!--begin::Row-->
+        <div class="row" id="event_list">
+
+        </div>
+        <div id="event_pagination" class="row d-flex justify-content-center align-items-center flex-wrap">
+
+        </div>
+    </th:block>
+    <th:block layout:fragment="js">
+        <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
+        <script th:src="@{/js/custom/style.js}"></script>
+    </th:block>
+</body>
+<!--end::Body-->
+
+</html>

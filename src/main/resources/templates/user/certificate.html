@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        padding: 0px;
+    }
+
+    * {
+        background-color: #fff;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    h2 {
+        margin-top: 40px;
+    }
+
+    .form {
+        padding: 20px;
+    }
+
+    .form .title {
+        margin-bottom: 60px;
+    }
+
+    #head1 {
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black;
+        color: #5680E9;
+    }
+
+    img {
+        height: 840;
+        opacity: .3;
+        display: block;
+        position: absolute;
+    }
+
+    /* .form .row:nth-child(even) {
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    } */
+</style>
+
+<body>
+    <div class="container form" id="form">
+        <div class="row title hidden-print">
+            <div class="col-sm-6">
+                <h1>Download Certificate</h1>
+            </div>
+            <div class="col-sm-6 text-right"><a class="btn btn-success" id="exportForm">Download</a></div>
+        </div>
+        <div id="first-page">
+            <div class=" row ">
+                <p style=" font-size: 18px; text-indent: 30px;" th:text="'No. ' + ${id}"></p>
+            </div>
+            <div class="row " style="margin-top: 100px;">
+                <div class="col-12 d-flex justify-content-center">
+                    <i class="fas fa-certificate text-warning" style="font-size: 200px;"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <h1 id="head1" style="font-size: 80px; margin-top: 200px;">CERTIFICATE</h1>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <span style="font-size: 36px;  margin-top: 50px;">Presented To :</span>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <h3 style="font-family: 'Pacifico', cursive; font-size: 86px;" th:text="${data.name}">
+                    </h3>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <span style="font-size: 36px; ">As a Participant in an Event</span>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <span style="font-size: 64px; font-weight: bold;" th:text="${data.eventTitle}"></span>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <span style="font-size: 36px;"
+                        th:text="'On ' + ${data.startDate} + ' to ' + ${data.endDate}"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <span style="font-size: 24px; margin-top: 100px;">Head of Learning Department,</span>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <span style="font-size: 42px; font-family: 'Dancing Script', cursive;">Signature</span>
+                </div>
+            </div>
+            <div class="row">
+                <hr style="height: 50px; color: #ffffff; margin-top: 80px;">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script th:inline="javascript">
+        var idTicket = [[${ id }]];
+        $('#exportForm').click(function () {
+            var pdf = new jsPDF({
+                orientation: "p",
+                unit: "mm",
+                format: 'a4'
+            });
+            var firstPage;
+
+            html2canvas($('#first-page'), {
+                onrendered: function (canvas) {
+                    firstPage = canvas.toDataURL('image/jpeg', 1.0);
+                }
+            });
+
+
+            setTimeout(function () {
+                pdf.addImage(firstPage, 'JPEG', 5, 5, 200, 0);
+                pdf.save(`${idTicket}.pdf`);
+            }, 150);
+        });
+    </script>
+</body>
+
+</html>
